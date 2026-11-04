@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="generator" content="work-report skill">
+<style>
+  :root{--ink:#1b1b1a;--ink-2:#45443f;--ink-3:#8a8880;--line:#e4e2db;--line-strong:#cfccc2;--accent:#1f4e79;--bg:#f1f0ec}
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{height:100%}
+  body{margin:0;display:flex;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .sidebar{flex:0 0 292px;display:flex;flex-direction:column;background:#fff;border-right:1px solid var(--line)}
+  .brand{padding:20px 20px 12px;border-bottom:1px solid var(--line)}
+  .brand h1{margin:0 0 3px;font-size:15px;font-weight:700}
+  .brand .meta{font-size:11.5px;color:var(--ink-3)}
+  .mode{display:inline-block;margin-top:7px;padding:1px 7px;border-radius:9px;font-size:10.5px;
+    letter-spacing:.05em;border:1px solid var(--line-strong);color:var(--ink-3)}
+  .mode.live{border-color:#b9cfc0;color:#2c6549;background:#f2f8f4}
+  .connect{padding:14px 20px;border-bottom:1px solid var(--line)}
+  .connect button{width:100%;font:inherit;font-size:12.5px;padding:8px 10px;border-radius:8px;
+    border:1px solid #cfd9e2;background:#f4f8fb;color:#1f4e79;cursor:pointer}
+  .connect button:hover{background:#eaf2f8;border-color:#a8c2d6}
+  .connect p{margin:8px 0 0;font-size:11px;line-height:1.6;color:var(--ink-3)}
+  .list{flex:1;overflow:auto;padding:6px 0 24px}
+  .group{padding:15px 20px 3px;font-size:10.5px;letter-spacing:.16em;color:var(--ink-3)}
+  .entry{display:block;width:100%;text-align:left;border:0;background:none;padding:8px 20px;
+    cursor:pointer;font:inherit;color:var(--ink-2);border-left:3px solid transparent}
+  .entry:hover{background:#faf9f6}
+  .entry.active{background:#f1f6fa;border-left-color:var(--accent);color:var(--ink)}
+  .entry .name{display:block;font-size:13.5px;font-weight:600}
+  .entry .sub{display:block;margin-top:2px;font-size:11.5px;color:var(--ink-3)}
+  .entry .tally{display:block;margin-top:3px;font-size:11px;color:var(--ink-3)}
+  .main{flex:1;overflow:auto;min-width:0;display:flex;flex-direction:column}
+  .bar{position:sticky;top:0;z-index:5;display:flex;gap:6px;align-items:center;
+    padding:10px 26px;background:#fffefb;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .bar .label{margin-right:auto;font-size:12.5px;color:var(--ink-3)}
+  .bar button{font:inherit;font-size:12.5px;padding:5px 12px;border:1px solid #d8d5cc;border-radius:7px;
+    background:#fff;color:var(--ink-2);cursor:pointer}
+  .bar button:hover{border-color:#b9b5a9;color:var(--ink)}
+  .bar button.primary{background:#1f4e79;border-color:#1f4e79;color:#fff}
+  .bar button.primary:hover{background:#19405f}
+  .bar .status{font-size:12px;color:var(--ink-3);min-width:150px;text-align:right}
+  .bar .status.ok{color:#2c6549}
+  .bar .status.warn{color:#9a3b2c}
+  .paper{max-width:830px;margin:22px auto 64px;background:#fff;padding:58px 68px 62px;
+    box-shadow:0 1px 2px rgba(0,0,0,.05),0 14px 40px rgba(0,0,0,.06)}
+  #editor{flex:1;display:flex;padding:22px 0 40px}
+  #ta{display:block;width:100%;max-width:830px;margin:0 auto;min-height:70vh;resize:vertical;
+    font:14px/1.85 Consolas,"Cascadia Mono","Courier New",monospace;
+    padding:34px 38px;border:1px solid var(--line-strong);border-radius:3px;background:#fffdf9;color:#2a2a26;
+    box-shadow:0 1px 2px rgba(0,0,0,.05)}
+  #ta:focus{outline:2px solid #bcd3e6;outline-offset:-1px}
+  h1{margin:0 0 4px;font-size:27px;line-height:1.25;font-weight:700}
+  .period{margin:0 0 8px;font-size:13.5px;color:var(--ink-3)}
+  h2{margin:38px 0 0;padding:0 0 9px 13px;font-size:19px;line-height:1.4;font-weight:700;
+    border-left:4px solid var(--accent);border-bottom:1px solid var(--line)}
+  h3{margin:24px 0 9px;font-size:15px;font-weight:700;color:#3a3934}
+  .item{margin:0 0 7px;padding-left:1.55em;text-indent:-1.55em;font-size:15.5px;line-height:1.85}
+  .mk{display:inline;color:var(--ink-3);margin-right:.45em;font-size:13px}
+  .done{color:#2c6549}.todo{color:#9a3b2c}.doing{color:#8a6a1c}
+  table{width:100%;border-collapse:collapse;margin:20px 0 4px;font-size:14px}
+  th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left}
+  th{font-size:12px;font-weight:600;letter-spacing:.09em;color:var(--ink-3);
+    border-bottom:1px solid var(--line-strong);background:#faf9f6}
+  td.num{text-align:right;width:84px;color:var(--ink-2)}
+  .empty{padding:80px 40px;text-align:center;color:var(--ink-3);font-size:13.5px;line-height:2}
+  .empty button{margin-top:14px;font:inherit;font-size:13px;padding:9px 18px;border-radius:8px;
+    border:1px solid #cfd9e2;background:#f4f8fb;color:#1f4e79;cursor:pointer}
+  @media print{
+    body{background:#fff;display:block}
+    .sidebar,.bar{display:none!important}
+    .main{overflow:visible}
+    .paper{max-width:none;margin:0;padding:0;box-shadow:none}
+    h2{break-after:avoid}.item{break-inside:avoid}
+  }
+  @page{margin:18mm 16mm}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand">
+    <h1>{{TITLE}}</h1>
+    <div class="meta" id="meta">未连接</div>
+    <span class="mode" id="mode">快照</span>
+  </div>
+  <div class="connect" id="connectBox">
+    <button type="button" id="btnConnect">选择报告文件夹</button>
+    <p id="connectHint">选中放报告的文件夹。授权一次后，这个页面就能直接读、直接写回 .md。</p>
+  </div>
+  <nav class="list" id="list"></nav>
+</aside>
+<main class="main">
+  <div class="bar">
+    <span class="label" id="label"></span>
+    <button type="button" id="btnEdit">编辑</button>
+    <button type="button" id="btnSave" class="primary" hidden>保存 Ctrl+S</button>
+    <button type="button" id="btnCancel" hidden>取消</button>
+    <button type="button" id="btnCopy">复制全文</button>
+    <button type="button" id="btnMd">复制 MD</button>
+    <button type="button" id="btnPrint">打印</button>
+    <span class="status" id="status"></span>
+  </div>
+  <article class="paper report" id="doc"></article>
+  <section id="editor" hidden><textarea id="ta" spellcheck="false"></textarea></section>
+</main>
+<script type="application/json" id="data">{{DATA}}</script>
+<script>
+(function(){
+  'use strict';
+  var BOOT = {};
+  try { BOOT = JSON.parse(document.getElementById('data').textContent) || {}; } catch(e){ BOOT = {}; }
+
+  var doc = document.getElementById('doc');
+  var editor = document.getElementById('editor');
+  var ta = document.getElementById('ta');
+  var listEl = document.getElementById('list');
+  var labelEl = document.getElementById('label');
+  var statusEl = document.getElementById('status');
+  var metaEl = document.getElementById('meta');
+  var modeEl = document.getElementById('mode');
+  var connectBox = document.getElementById('connectBox');
+
+  var dirHandle = null;
+  var records = [];
+  var current = null;
+  var editing = false;
+
+  function say(t, kind){
+    statusEl.textContent = t || '';
+    statusEl.className = 'status' + (kind ? ' ' + kind : '');
+  }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function inline(s){ return esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>'); }
+  function statusOf(t){
+    if (/^未完成/.test(t)) return {cls:'todo', len:3};
+    if (/^进行中/.test(t)) return {cls:'doing', len:3};
+    if (/^完成/.test(t)) return {cls:'done', len:2};
+    return null;
+  }
+
+  function stripFront(text){
+    var m = text.match(/^---\s*\n([\s\S]*?)\n---\s*\n/);
+    if (!m) return {meta:{}, body:text};
+    var meta = {};
+    m[1].split(/\r?\n/).forEach(function(line){
+      var i = line.indexOf(':');
+      if (i > 0) meta[line.slice(0,i).trim()] = line.slice(i+1).trim();
+    });
+    return {meta:meta, body:text.slice(m[0].length)};
+  }
+
+  function parse(md){
+    var nodes = [], lines = md.replace(/\r/g,'').split('\n');
+    for (var i=0;i<lines.length;i++){
+      var line = lines[i].trim();
+      if (!line) continue;
+      var m;
+      if ((m = line.match(/^#\s+(.+)$/))){ nodes.push({t:'h1', v:m[1]}); continue; }
+      if ((m = line.match(/^##\s+(.+)$/))){ nodes.push({t:'h2', v:m[1]}); continue; }
+      if ((m = line.match(/^###\s+(.+)$/))){ nodes.push({t:'h3', v:m[1]}); continue; }
+      if ((m = line.match(/^[-*]\s+(.+)$/))){ nodes.push({t:'li', v:m[1]}); continue; }
+      if ((m = line.match(/^(\d+)[.)]\s+(.+)$/))){ nodes.push({t:'li', v:m[2], n:parseInt(m[1],10)}); continue; }
+      nodes.push({t:'p', v:line});
+    }
+    return nodes;
+  }
+
+  function tally(md){
+    var nodes = parse(md), out = {done:0, todo:0, doing:0};
+    for (var i=0;i<nodes.length;i++){
+      if (nodes[i].t !== 'li') continue;
+      var st = statusOf(nodes[i].v);
+      if (st) out[st.cls] += 1;
+    }
+    return out;
+  }
+
+  function renderMd(rec){
+    var nodes = parse(rec.body);
+    var out = [], order = [], stat = {}, section = null, groupKey = 'g0', counter = {}, secNo = {}, curNo = 0;
+    for (var i=0;i<nodes.length;i++){
+      var n = nodes[i];
+      if (n.t === 'h1'){
+        var parts = n.v.split('|');
+        out.push('<h1>' + inline(parts[0].trim()) + '</h1>');
+        if (parts[1]) out.push('<p class="period">' + inline(parts[1].trim()) + '</p>');
+        continue;
+      }
+      if (n.t === 'h2'){
+        section = n.v; groupKey = 'h2:' + n.v; curNo = 0;
+        if (!stat[section]){ stat[section] = {done:0,todo:0,doing:0}; order.push(section); }
+        out.push('<h2>' + inline(n.v) + '</h2>');
+        continue;
+      }
+      if (n.t === 'h3'){
+        groupKey = 'h3:' + n.v;
+        out.push('<h3>' + inline(n.v) + '</h3>');
+        continue;
+      }
+      if (n.t === 'li'){
+        var mark;
+        if (typeof n.n === 'number'){ mark = n.n + '.'; }
+        else if (rec.list === 'number'){
+          counter[groupKey] = (counter[groupKey]||0)+1;
+          mark = counter[groupKey] + '.';
+        }
+        else { mark = '\u25CF'; }
+        var st = statusOf(n.v);
+        if (st && section && stat[section]) stat[section][st.cls] += 1;
+        var body = st
+          ? '<strong class="' + st.cls + '">' + esc(n.v.slice(0, st.len)) + '</strong>' + inline(n.v.slice(st.len))
+          : inline(n.v);
+        out.push('<p class="item"><span class="mk">' + mark + '</span>' + body + '</p>');
+        continue;
+      }
+      out.push('<p class="item">' + inline(n.v) + '</p>');
+    }
+    if (rec.summary === 'on' && order.length){
+      var rows = order.map(function(k){
+        var s = stat[k];
+        return '<tr><td>' + esc(k) + '</td><td class="num">' + s.done + '</td><td class="num">' +
+               s.todo + '</td><td class="num">' + s.doing + '</td></tr>';
+      }).join('');
+      var table = '<table><thead><tr><th>系列</th><th class="num">完成</th><th class="num">未完成</th>' +
+                  '<th class="num">进行中</th></tr></thead><tbody>' + rows + '</tbody></table>';
+      for (var j=0;j<out.length;j++){
+        if (out[j].indexOf('<p class="period">') === 0){ out.splice(j+1,0,table); break; }
+      }
+    }
+    return out.join('\n');
+  }
+
+  function plainMd(rec){
+    var nodes = parse(rec.body), out = [], counter = {}, groupKey = 'g0';
+    for (var i=0;i<nodes.length;i++){
+      var n = nodes[i];
+      if (n.t === 'h1'){
+        var parts = n.v.split('|');
+        out.push(parts[0].trim());
+        if (parts[1]) out.push(parts[1].trim());
+        continue;
+      }
+      if (n.t === 'h2'){ groupKey = 'h2:'+n.v; out.push(n.v); continue; }
+      if (n.t === 'h3'){ groupKey = 'h3:'+n.v; out.push(n.v); continue; }
+      if (n.t === 'li'){
+        var mark;
+        if (typeof n.n === 'number'){ mark = n.n + '.'; }
+        else if (rec.list === 'number'){ counter[groupKey] = (counter[groupKey]||0)+1; mark = counter[groupKey] + '.'; }
+        else { mark = '\u25CF'; }
+        out.push(mark + ' ' + n.v.replace(/\*\*/g,''));
+        continue;
+      }
+      out.push(n.v.replace(/\*\*/g,''));
+    }
+    return out.join('\n');
+  }
+
+  function makeRecord(rel, name, handle, text){
+    var f = stripFront(text);
+    var kind = (f.meta.kind || (/月报/.test(name) ? 'monthly' : 'weekly'));
+    var h1 = (f.body.match(/^#\s+(.+)$/m) || [])[1] || '';
+    var period = h1.indexOf('|') > -1 ? h1.split('|')[1].trim() : '';
+    var digits = (name.match(/\d+/g) || []).join('');
+    return {
+      rel: rel, name: name, handle: handle, raw: text, body: f.body, meta: f.meta,
+      kind: kind, list: kind === 'monthly' ? 'number' : 'bullet',
+      summary: f.meta.summary || (kind === 'monthly' ? 'on' : 'off'),
+      title: f.meta.title || name.replace(/\.md$/i,''),
+      period: period, sort: parseInt(digits || '0', 10)
+    };
+  }
+
+  function adopt(list){
+    records = list.slice().sort(function(a, b){ return b.sort - a.sort; });
+    buildList();
+    var want = decodeURIComponent(location.hash.slice(1));
+    var hit = null;
+    for (var i=0;i<records.length;i++) if (records[i].name === want) hit = records[i];
+    show(hit || records[0] || null);
+  }
+
+  function groupLabel(r){
+    var i = r.rel.indexOf('/');
+    return i > 0 ? r.rel.slice(0, i) : (r.kind === 'monthly' ? '月报' : '周报');
+  }
+
+  function buildList(){
+    var order = [], map = {};
+    records.forEach(function(r){
+      var g = groupLabel(r);
+      if (!map[g]){ map[g] = []; order.push(g); }
+      map[g].push(r);
+    });
+    order.sort(function(a, b){
+      var sa = map[a][0] ? map[a][0].sort : 0;
+      var sb = map[b][0] ? map[b][0].sort : 0;
+      return sb - sa;
+    });
+    listEl.innerHTML = '';
+    order.forEach(function(key){
+      var head = document.createElement('div');
+      head.className = 'group';
+      head.textContent = key;
+      listEl.appendChild(head);
+      map[key].forEach(function(r){
+        var t = tally(r.body);
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'entry';
+        btn.setAttribute('data-rel', r.rel);
+        btn.innerHTML = '<span class="name">' + esc(r.title) + '</span>' +
+                        '<span class="sub">' + esc(r.period || r.name) + '</span>' +
+                        '<span class="tally">完成 ' + t.done + ' · 未完成 ' + t.todo + ' · 进行中 ' + t.doing + '</span>';
+        btn.addEventListener('click', function(){
+          if (editing) stopEdit(false);
+          location.hash = encodeURIComponent(r.name);
+        });
+        listEl.appendChild(btn);
+      });
+    });
+  }
+
+  function highlight(){
+    var nodes = listEl.querySelectorAll('.entry');
+    for (var i=0;i<nodes.length;i++){
+      nodes[i].classList.toggle('active', current && nodes[i].getAttribute('data-rel') === current.rel);
+    }
+  }
+
+  function show(rec){
+    current = rec;
+    editing = false;
+    editor.hidden = true;
+    doc.hidden = false;
+    document.getElementById('btnSave').hidden = true;
+    document.getElementById('btnCancel').hidden = true;
+    document.getElementById('btnEdit').hidden = false;
+    if (!rec){
+      doc.innerHTML = '<div class="empty">还没有报告。<br>把 .md 放进子文件夹（如 周报 / 月报），或点左边「选择报告文件夹」。</div>';
+      labelEl.textContent = '';
+      highlight();
+      return;
+    }
+    doc.innerHTML = renderMd(rec);
+    labelEl.textContent = rec.rel + (rec.handle ? '' : ' · 快照');
+    document.title = rec.title + ' · {{TITLE}}';
+    highlight();
+    say('');
+  }
+
+  function startEdit(){
+    if (!current) return;
+    if (!current.handle){
+      say('快照不能改，先连接文件夹', 'warn');
+      return;
+    }
+    editing = true;
+    ta.value = current.raw;
+    doc.hidden = true;
+    editor.hidden = false;
+    document.getElementById('btnSave').hidden = false;
+    document.getElementById('btnCancel').hidden = false;
+    document.getElementById('btnEdit').hidden = true;
+    ta.focus();
+    say('改完 Ctrl+S');
+  }
+
+  function stopEdit(reload){
+    editing = false;
+    editor.hidden = true;
+    doc.hidden = false;
+    document.getElementById('btnSave').hidden = true;
+    document.getElementById('btnCancel').hidden = true;
+    document.getElementById('btnEdit').hidden = false;
+    if (reload && current){ current = makeRecord(current.rel, current.name, current.handle, current.raw); show(current); }
+  }
+
+  async function saveEdit(){
+    if (!current || !editing) return;
+    if (!current.handle){ say('没有文件句柄，无法写回', 'warn'); return; }
+    try {
+      var perm = await current.handle.queryPermission({mode:'readwrite'});
+      if (perm !== 'granted'){
+        perm = await current.handle.requestPermission({mode:'readwrite'});
+      }
+      if (perm !== 'granted'){ say('没有写入权限', 'warn'); return; }
+      var w = await current.handle.createWritable();
+      await w.write(ta.value);
+      await w.close();
+      current.raw = ta.value;
+      var f = stripFront(ta.value);
+      current.body = f.body;
+      current.meta = f.meta;
+      stopEdit(false);
+      show(makeRecord(current.rel, current.name, current.handle, current.raw));
+      buildList();
+      highlight();
+      say('已写回 ' + current.rel, 'ok');
+    } catch (err){
+      say('写入失败：' + (err && err.name ? err.name : 'error'), 'warn');
+    }
+  }
+
+  // ---------- 目录 ----------
+  async function pickFolder(){
+    if (!window.showDirectoryPicker){
+      say('这个浏览器不支持文件夹访问', 'warn');
+      return;
+    }
+    try {
+      var h = await window.showDirectoryPicker({mode:'readwrite', id:'work-report'});
+      var perm = await h.requestPermission({mode:'readwrite'});
+      if (perm !== 'granted'){ say('没有授权', 'warn'); return; }
+      dirHandle = h;
+      await idbSet('dir', h);
+      await loadFromDir();
+    } catch (err){
+      if (err && err.name === 'AbortError') return;
+      say('打开失败：' + (err && err.name ? err.name : 'error'), 'warn');
+    }
+  }
+
+  async function scan(){
+    var out = [];
+    for await (var entry of dirHandle.entries()){
+      var name = entry[0], h = entry[1];
+      if (h.kind === 'directory'){
+        if (name.charAt(0) === '_' || name === 'node_modules') continue;
+        for await (var f of h.entries()){
+          var fn = f[0], fh = f[1];
+          if (fh.kind !== 'file') continue;
+          if (!/\.md$/i.test(fn)) continue;
+          if (fn.charAt(0) === '_') continue;
+          var file = await fh.getFile();
+          out.push(makeRecord(name + '/' + fn, fn, fh, await file.text()));
+        }
+      } else if (h.kind === 'file'){
+        if (!/\.md$/i.test(name) || name.charAt(0) === '_') continue;
+        var f0 = await h.getFile();
+        out.push(makeRecord(name, name, h, await f0.text()));
+      }
+    }
+    return out;
+  }
+
+  async function loadFromDir(){
+    try {
+      var list = await scan();
+      metaEl.textContent = dirHandle.name + ' · ' + list.length + ' 份';
+      modeEl.textContent = '实时';
+      modeEl.className = 'mode live';
+      connectBox.hidden = true;
+      adopt(list);
+    } catch (err){
+      say('读取失败：' + (err && err.name ? err.name : 'error'), 'warn');
+    }
+  }
+
+  // ---------- IndexedDB ----------
+  function idb(){
+    return new Promise(function(res, rej){
+      var r = indexedDB.open('work-report', 1);
+      r.onupgradeneeded = function(){ r.result.createObjectStore('kv'); };
+      r.onsuccess = function(){ res(r.result); };
+      r.onerror = function(){ rej(r.error); };
+    });
+  }
+  async function idbSet(k, v){
+    try { var db = await idb();
+      await new Promise(function(res, rej){
+        var tx = db.transaction('kv','readwrite');
+        tx.objectStore('kv').put(v, k);
+        tx.oncomplete = res; tx.onerror = function(){ rej(tx.error); };
+      });
+    } catch(e){}
+  }
+  async function idbGet(k){
+    try { var db = await idb();
+      return await new Promise(function(res){
+        var tx = db.transaction('kv','readonly');
+        var rq = tx.objectStore('kv').get(k);
+        rq.onsuccess = function(){ res(rq.result || null); };
+        rq.onerror = function(){ res(null); };
+      });
+    } catch(e){ return null; }
+  }
+
+  // ---------- 启动 ----------
+  // 先同步画快照，再去问 IndexedDB —— 索引读取慢不能拖住首屏
+  function boot(){
+    var snaps = (BOOT.reports || []).map(function(r){
+      return makeRecord(r.file, String(r.file).split('/').pop(), null, r.md);
+    });
+    if (snaps.length){
+      records = snaps;
+      metaEl.textContent = '快照 · ' + snaps.length + ' 份';
+    }
+    adopt(records);
+    upgradeFromStore();
+  }
+
+  async function upgradeFromStore(){
+    try {
+      var saved = await idbGet('dir');
+      if (!saved) return;
+      var perm = await saved.queryPermission({mode:'readwrite'});
+      if (perm === 'granted'){
+        dirHandle = saved;
+        await loadFromDir();
+        return;
+      }
+      dirHandle = saved;
+      document.getElementById('btnConnect').textContent = '继续使用 ' + saved.name;
+      document.getElementById('connectHint').textContent = '上次用的文件夹还在，点一下继续（浏览器会再确认一次）。';
+    } catch(e){}
+  }
+
+  document.getElementById('btnConnect').addEventListener('click', async function(){
+    if (dirHandle){
+      var perm = await dirHandle.requestPermission({mode:'readwrite'});
+      if (perm === 'granted'){ await loadFromDir(); return; }
+    }
+    await pickFolder();
+  });
+  document.getElementById('btnEdit').addEventListener('click', startEdit);
+  document.getElementById('btnSave').addEventListener('click', saveEdit);
+  document.getElementById('btnCancel').addEventListener('click', function(){ stopEdit(true); });
+  document.getElementById('btnCopy').addEventListener('click', function(){
+    if (!current) return;
+    var html = '<div>' + renderMd(current) + '</div>';
+    var text = plainMd(current);
+    if (navigator.clipboard && window.ClipboardItem){
+      navigator.clipboard.write([new ClipboardItem({
+        'text/html': new Blob([html], {type:'text/html'}),
+        'text/plain': new Blob([text], {type:'text/plain'})
+      })]).then(function(){ say('已复制，可直接粘贴', 'ok'); })
+        .catch(function(){ say('复制失败', 'warn'); });
+    } else { say('不支持富文本复制', 'warn'); }
+  });
+  document.getElementById('btnMd').addEventListener('click', function(){
+    if (!current) return;
+    navigator.clipboard.writeText(current.raw).then(function(){ say('已复制 Markdown', 'ok'); })
+      .catch(function(){ say('复制失败', 'warn'); });
+  });
+  document.getElementById('btnPrint').addEventListener('click', function(){ window.print(); });
+  window.addEventListener('hashchange', function(){
+    var want = decodeURIComponent(location.hash.slice(1));
+    for (var i=0;i<records.length;i++) if (records[i].name === want){ show(records[i]); return; }
+  });
+  window.addEventListener('keydown', function(e){
+    if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')){
+      e.preventDefault();
+      if (editing) saveEdit();
+      else say('先点「编辑」', '');
+    }
+  });
+
+  window.__test = {
+    loadFromMap: function(map){
+      var list = [];
+      Object.keys(map).forEach(function(rel){
+        list.push(makeRecord(rel, rel.split('/').pop(), null, map[rel]));
+      });
+      adopt(list);
+    },
+    setDir: function(h){ dirHandle = h; return loadFromDir(); }
+  };
+
+  boot();
+})();
+</script>
+</body>
+</html>

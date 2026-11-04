@@ -1,0 +1,578 @@
+<!doctype html>
+<!-- work-report snapshot 9bd15f72a5a2 2026-11-04 21:55 5 files -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>工作报告</title>
+<meta name="generator" content="work-report skill">
+<style>
+  :root{--ink:#1b1b1a;--ink-2:#45443f;--ink-3:#8a8880;--line:#e4e2db;--line-strong:#cfccc2;--accent:#1f4e79;--bg:#f1f0ec}
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{height:100%}
+  body{margin:0;display:flex;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .sidebar{flex:0 0 292px;display:flex;flex-direction:column;background:#fff;border-right:1px solid var(--line)}
+  .brand{padding:20px 20px 12px;border-bottom:1px solid var(--line)}
+  .brand h1{margin:0 0 3px;font-size:15px;font-weight:700}
+  .brand .meta{font-size:11.5px;color:var(--ink-3)}
+  .mode{display:inline-block;margin-top:7px;padding:1px 7px;border-radius:9px;font-size:10.5px;
+    letter-spacing:.05em;border:1px solid var(--line-strong);color:var(--ink-3)}
+  .mode.live{border-color:#b9cfc0;color:#2c6549;background:#f2f8f4}
+  .connect{padding:14px 20px;border-bottom:1px solid var(--line)}
+  .connect button{width:100%;font:inherit;font-size:12.5px;padding:8px 10px;border-radius:8px;
+    border:1px solid #cfd9e2;background:#f4f8fb;color:#1f4e79;cursor:pointer}
+  .connect button:hover{background:#eaf2f8;border-color:#a8c2d6}
+  .connect p{margin:8px 0 0;font-size:11px;line-height:1.6;color:var(--ink-3)}
+  .list{flex:1;overflow:auto;padding:6px 0 24px}
+  .group{padding:15px 20px 3px;font-size:10.5px;letter-spacing:.16em;color:var(--ink-3)}
+  .entry{display:block;width:100%;text-align:left;border:0;background:none;padding:8px 20px;
+    cursor:pointer;font:inherit;color:var(--ink-2);border-left:3px solid transparent}
+  .entry:hover{background:#faf9f6}
+  .entry.active{background:#f1f6fa;border-left-color:var(--accent);color:var(--ink)}
+  .entry .name{display:block;font-size:13.5px;font-weight:600}
+  .entry .sub{display:block;margin-top:2px;font-size:11.5px;color:var(--ink-3)}
+  .entry .tally{display:block;margin-top:3px;font-size:11px;color:var(--ink-3)}
+  .main{flex:1;overflow:auto;min-width:0;display:flex;flex-direction:column}
+  .bar{position:sticky;top:0;z-index:5;display:flex;gap:6px;align-items:center;
+    padding:10px 26px;background:#fffefb;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .bar .label{margin-right:auto;font-size:12.5px;color:var(--ink-3)}
+  .bar button{font:inherit;font-size:12.5px;padding:5px 12px;border:1px solid #d8d5cc;border-radius:7px;
+    background:#fff;color:var(--ink-2);cursor:pointer}
+  .bar button:hover{border-color:#b9b5a9;color:var(--ink)}
+  .bar button.primary{background:#1f4e79;border-color:#1f4e79;color:#fff}
+  .bar button.primary:hover{background:#19405f}
+  .bar .status{font-size:12px;color:var(--ink-3);min-width:150px;text-align:right}
+  .bar .status.ok{color:#2c6549}
+  .bar .status.warn{color:#9a3b2c}
+  .paper{max-width:830px;margin:22px auto 64px;background:#fff;padding:58px 68px 62px;
+    box-shadow:0 1px 2px rgba(0,0,0,.05),0 14px 40px rgba(0,0,0,.06)}
+  #editor{flex:1;display:flex;padding:22px 0 40px}
+  #ta{display:block;width:100%;max-width:830px;margin:0 auto;min-height:70vh;resize:vertical;
+    font:14px/1.85 Consolas,"Cascadia Mono","Courier New",monospace;
+    padding:34px 38px;border:1px solid var(--line-strong);border-radius:3px;background:#fffdf9;color:#2a2a26;
+    box-shadow:0 1px 2px rgba(0,0,0,.05)}
+  #ta:focus{outline:2px solid #bcd3e6;outline-offset:-1px}
+  h1{margin:0 0 4px;font-size:27px;line-height:1.25;font-weight:700}
+  .period{margin:0 0 8px;font-size:13.5px;color:var(--ink-3)}
+  h2{margin:38px 0 0;padding:0 0 9px 13px;font-size:19px;line-height:1.4;font-weight:700;
+    border-left:4px solid var(--accent);border-bottom:1px solid var(--line)}
+  h3{margin:24px 0 9px;font-size:15px;font-weight:700;color:#3a3934}
+  .item{margin:0 0 7px;padding-left:1.55em;text-indent:-1.55em;font-size:15.5px;line-height:1.85}
+  .mk{display:inline;color:var(--ink-3);margin-right:.45em;font-size:13px}
+  .done{color:#2c6549}.todo{color:#9a3b2c}.doing{color:#8a6a1c}
+  table{width:100%;border-collapse:collapse;margin:20px 0 4px;font-size:14px}
+  th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left}
+  th{font-size:12px;font-weight:600;letter-spacing:.09em;color:var(--ink-3);
+    border-bottom:1px solid var(--line-strong);background:#faf9f6}
+  td.num{text-align:right;width:84px;color:var(--ink-2)}
+  .empty{padding:80px 40px;text-align:center;color:var(--ink-3);font-size:13.5px;line-height:2}
+  .empty button{margin-top:14px;font:inherit;font-size:13px;padding:9px 18px;border-radius:8px;
+    border:1px solid #cfd9e2;background:#f4f8fb;color:#1f4e79;cursor:pointer}
+  @media print{
+    body{background:#fff;display:block}
+    .sidebar,.bar{display:none!important}
+    .main{overflow:visible}
+    .paper{max-width:none;margin:0;padding:0;box-shadow:none}
+    h2{break-after:avoid}.item{break-inside:avoid}
+  }
+  @page{margin:18mm 16mm}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand">
+    <h1>工作报告</h1>
+    <div class="meta" id="meta">未连接</div>
+    <span class="mode" id="mode">快照</span>
+  </div>
+  <div class="connect" id="connectBox">
+    <button type="button" id="btnConnect">选择报告文件夹</button>
+    <p id="connectHint">选中放报告的文件夹。授权一次后，这个页面就能直接读、直接写回 .md。</p>
+  </div>
+  <nav class="list" id="list"></nav>
+</aside>
+<main class="main">
+  <div class="bar">
+    <span class="label" id="label"></span>
+    <button type="button" id="btnEdit">编辑</button>
+    <button type="button" id="btnSave" class="primary" hidden>保存 Ctrl+S</button>
+    <button type="button" id="btnCancel" hidden>取消</button>
+    <button type="button" id="btnCopy">复制全文</button>
+    <button type="button" id="btnMd">复制 MD</button>
+    <button type="button" id="btnPrint">打印</button>
+    <span class="status" id="status"></span>
+  </div>
+  <article class="paper report" id="doc"></article>
+  <section id="editor" hidden><textarea id="ta" spellcheck="false"></textarea></section>
+</main>
+<script type="application/json" id="data">{"generated": "2026-11-04 21:55", "reports": [{"file": "周报/20261027-周报.md", "md": "# 工作周报 | 2026.10.27 – 2026.11.02\n\n## DV460\n- 完成EBV3 板 PCIe SSD Gen2 链路验证与高负载压测：新建 Gen2 DTS 成功建链 5.0GT/s，顺序读 429MB/s、顺序写 300MB/s，112GiB 混合压测零掉线\n- 完成USB A 口与 C 口设备树开启：按核心板与前面板原理图对齐通道映射，A 口挂 GL850 下游 Port2 与 4G / WiFi 共享上游，C 口 2.0 悬空\n- 完成debugfold 目录文档整理：根级 AGENTS.md 管约束与流程，子级各自管备份与单文件 dts，固件只归档不改内容\n\n## DV454\n### xieli 客户\n- 完成AC501_DEBUG_PACKET 改造：232 原文在业务解析前记录，组帧与 CRC 校验前落十六进制日志，错帧残帧都保留\n\n### 通用板\n- 完成DV424 设计图文档：A4 横向 24 页纯矢量 PDF，含架构、DFD 0/1/2 层、状态机与时序图\n- 完成DV424 模块盘点：26 个可编译模块逐个给出产物名、所属线程与证据行号，作为契约图与部署图的索引\n- 完成DV424 部署图与契约图：22 个进程加 libmsg 总线拓扑，接口契约单独 3 页\n- 完成AC601 RS232 链路核验：MCU 侧固定 9600 8N1，长度字段大端，CRC16 低字节先发\n- 完成AC501 232 原始报文记录：组帧与 CRC 校验前落十六进制日志，错帧残帧都留原文\n- 完成alarmin 退出误关 alarmout 修复核对：与上游修复提交逐字节一致，未绑定 alarmin 的 out1 不再被误关\n- 未完成DV424 喇叭报警反复启停：新日志里 485 fun[0] 消失，232 通道下发正常，需实机复现确认\n\n## DV456\n### DV456-FTC1 客户\n- 完成刷卡蜂鸣定位：授权刷卡器初始化即启动 15 次蜂鸣且不查开机蜂鸣开关，有效卡只负责停鸣，3 秒长鸣来自 ARM 报警链路\n"}, {"file": "周报/20261020-周报.md", "md": "# 工作周报 | 2026.10.20 – 2026.10.26\n\n## DV460\n- 完成原理图检查：C 口只接 usbdp_phy 的 SSTX / SSRX，DP / DM 悬空，无法插纯 2.0 设备\n- 完成GL850G 配置核对：上游挂 USB2_OTG0，下行分给 MCU、USB-A、4G、WiFi，复位由 MCU 的 PD3 / GL850_RST_B 释放\n- 完成RK3576 通道归属核对：Combo PHY1 是 PCIe1 / SATA1 / USB3_OTG1 三选一，SATA1 已占用，Hub 只能挂 OTG0\n\n## DV454\n### Alpine 客户\n- 完成CODE3 三路开关互相干扰修复：原逻辑不记状态、按单开关发包，先开显示再开灯会关显示，改为按整组状态发包\n- 完成12 步测试步骤交付：重点验证关显示不连带开关灯条与扬声器，客户反馈已符合预期\n\n### xieli 客户\n- 完成AC601 CAN 接口验证：29 位扩展帧 ID 0x1AC60101，一次播放下发 8+8+6 三帧，抓包与源码报文逐帧一致\n- 完成AC601 485 接口验证：产线做线时线序镜像，外设上电不启动，调回线序后通讯与供电均正常\n- 未完成工厂申领 AC501 RS232 报警语音不播的定位：语音 1 有声、21 无声，只有灯光没有声音，按键可手动播放，怀疑外设缺少 21 号语音资源\n- 未完成AC601 RS232 接口监控验证：协议经核验与 AC501 一致，仅 CAN ID 不同，监控回复路径仍在测试\n\n### 通用板\n- 完成alarmin 退出误关未关联 alarmout 的修复：checklist 手动拉高的 out1 不再被误关，而它与任何 alarmin 都没有绑定\n- 完成RS485 线控器接入时 AC501 离线误报修复：旧线控器探测帧抢占总线，MCU 与 SoC 两头加门控，实测 100 个回包丢包率降为 0\n- 完成232 屏显 4 分割帧构造：逆向复算协议，明确 CRC 计算域与低字节先发，校验通过，1523 混合布局仍需设备方提供显示码\n\n## DV456\n### DV456-ALEDO 客户\n- 进行中微波雷达 WARN / ALARM 各配一组输出（待下需求单）：当前逻辑只要报警就输出选中的 OUTX，不受区间独立控制\n\n### DV456-embedded 客户\n- 完成bug28 修复：BSD 三色提示音统一回 16 / 17 / 18，对应灯色 5 / 4 / 3，中英文界面均不再回落红黄交替\n- 完成bug8 定位：alarmout2 在雷达与移动侦测触发下都是常输出，底层未接 500ms 交替交变逻辑，也没有 PWM 配置入口\n- 完成AC601 手动播放测试：代码排查确认只发送两次播放包、没有主动停的逻辑，停止由 AC601 控制，实机验证无客户反馈的无人时灯光残留\n- 进行中bug7 定位：拔单探头连带消失左侧三个与右侧最上一个，恰好同属 CAN 帧 0x400，16 路雷达一组 4 个，待借雷达确认\n\n## DV436\n### DV436-novatek 客户\n- 完成旧自动化测试 API 恢复：此前修改 API 影响了液晶设备已恢复，并将 DV436 自动化测试 API 用宏隔离\n"}, {"file": "周报/20261013-周报.md", "md": "# 工作周报 | 2026.10.13 – 2026.10.19\n\n## DV460\n- 完成SATA1 降速测试与已排除项：DTS 限速、长时间压测、1nf 与 10nf 耦合电容对照三组均无差异，异常只在 6.0Gbps 下出现\n- 未完成SATA1 6Gbps BadCRC 根因定位：上电首次协商 6.0Gbps 即报 SError UnrecovData 10B8B BadCRC 并多次 hard reset，内核自动降速 3.0Gbps，需硬件判定信号完整性\n- 完成控制台命令历史持久化：overlay 落 00-history.sh，HISTFILE 指向 /userdata/.bash_history，HISTSIZE 3000 并去重，重启后可上键回溯\n- 完成DTS 的 SSC 扩频时钟调整：7 块盘稳定在 GEN2，读速率 250–270MB/s、写速率 160–180MB/s\n\n## DV454\n### xieli 客户\n- 完成合并引入的编译错误修复：media_engine_455 的 case 分支未加花括号导致跨初始化、mcu_callback 的 #else 多一层括号，改后 60 余条连锁报错全消\n- 完成AC601 兼容核验：232 / 485 查询帧与 AC501 完全一致（命令字 0x0A、序号 1 字节、Modbus CRC16），CAN 侧需把发送 ID 与心跳改为 0x1AC60101 / 0x1AC6010F\n\n### 通用板\n- 未完成RS485 PanicButton 误报治理：总线式查询下 AC501 监控无法判定接入设备是否为 AC501，接入线控器或其他设备即查询无应答，开机 17 秒后固定产生一次离线报告，正与建瑜评估方案\n\n## DV456\n### DV456-ELECTRON 客户\n- 完成ADA650 alarm in 车速门控：复用 BSD 的车速闭区间，区间外在 main 入口把有效触发掩码置零，保留原始输入状态不影响转向灯联动\n- 完成ELECTRON 版虚拟速度适配：在 GPS 取速入口补齐 speedTest 虚拟速度读取，无该文件时保持原行为，按 20km/h 实测门控符合预期\n- 完成三起事件录像日志定位：对比排查 10-14 报警日志，确认由物理引脚 Alarm In 1/2 高电平触发，属 AICAM 算法误报而非 DVR BUG\n\n### DV456-FTC1 客户\n- 完成AC501 不报警定位（与星辉联合）：语音编号查表失败致告警丢弃，FTC1 支持 BSD 选 BEEP、VOICE2 选前后左右\n- 完成AC501 播放静置失效定位：日志确认选 VOICE2 时由 AC601 工作而非 AC501，另发现其 RS485 接口无独立供电，静置约 1 分钟后无法播放\n\n### DV456-GBA 客户\n- 完成RFID 未知卡处理修复：旧逻辑只要有司机成功登录，后续未授权卡报警也计入该司机名下，新逻辑在登录状态先退出已授权司机再报警，姓名落为 UNKNOW\n\n## DV436\n- 完成bug23 雷达报警无声判定：现场屏幕声音开关未开导致，属配置问题，未改固件，已把结论反馈给测试\n"}, {"file": "周报/20261008-周报.md", "md": "# 工作周报 | 2026.10.08 – 2026.10.12\n\n## DV460\n- 完成SAI1 抢占 GMAC1 复位引脚的 DTS 修复：禁用 ES8388 与 SAI1，重新构建并发布修复镜像，网口侧确认是板端电阻连接问题，处理后 RX 仍为 0\n- 完成RK3576 SATA1（CN1）性能测速：SATA Gen2 下实测读 266MB/s、写 179MB/s，盘1 为 GEN2、盘2 为 GEN1、盘3 不识别，1nf 与 10nf 拓展版现象一致，怀疑硬件走线或供电链路\n\n## DV454\n### Alpine 客户\n- 完成Code3 控制程序与跨平台适配：GUI 经 MCU 下发 3 路开关，CAN 设为 250Kbps、采样点 75%，功能宏统一迁移至 CODE3 并在 DV424 平台启用，覆盖 CAN 与 GUI 入口\n- 完成代码精简：清理 CODE3 程序遗留的冗余宏控与缩进导致的编译错误，完成公共配置及状态 ABI 去宏控重构\n- 完成与客户线下见面：梳理待办事项，明确部分项目的时间节点，输出关键任务专项跟踪表给禄钧\n- 完成特采程序下发与技术文档编制：下发特采程序并交付《Code3 电气连接说明书》，依据实物端口重新绘制接线总图\n\n### GMT 客户\n- 完成DV454_GMT 乘客计数功能核验：确认 RS232 通道已强制开启 PROTOCOL，接收端读取配置原值会阻断通信，默认选 RADAR 而 APC 计数需要 PROTOCOL\n\n### jiuyitong 客户\n- 完成大容量存储支持：定位 JYTPRO 上电硬盘不识别问题（4071 可复现，当时最新为 4081），在 EXFAT 分支补充大容量磁盘驱动并移植相关二进制程序\n\n### xieli 客户\n- 完成RS232 监控通信落地与代码解耦：协议帧格式锁定 AA55 + Modbus CRC，业务逻辑解耦至独立文件\n- 完成CAN / RS485 / RS232 三路接口合并与数据转发：保持 service / adapter 分层解耦，合入 232 转 485 序号偏移修复，实测通过并核验 CAN 默认波特率为 500Kbps\n- 完成RS485 偶发离线排查：根因为旧线控器探测帧总线冲突，引入门控机制后通信恢复稳定\n\n## DV456\n### TMV 客户\n- 完成77G 毫米波雷达报警录像 BUG5 排查：TMV 分支录像触发逻辑固定绑定 ID0，ID1 与 ID2 报警不触发录像属于既定代码规则设计\n"}, {"file": "月报/202610-月报.md", "md": "# 工作月报 | 2026.10.01 – 2026.10.31\n\n## DV460\n- 完成EBV2板SATA1硬盘速率验证：核对设备树与原理图配置 Combo PHY1，内核降速至 Gen2 3.0Gbps 稳定运行，顺序读 276MB/s、写 180MB/s\n- 完成EBV3板SATA1验证：最开始协商 6.0Gbps 偶尔成功（推测仍是高速信号问题），随后仍降速到 3.0Gbps，v2 与 v3 板压测全程零错误、速率相当\n- 完成EBV3板 PCIe SSD Gen2 链路验证与高负载压测：新建 Gen2 DTS 成功建链 5.0GT/s，顺序读 429MB/s、顺序写 300MB/s，112GiB 混合压测无掉线、零 AER 报错\n- 完成清理 EVB1 设备树中 ES8388 音频对 GPIO4_A2 的复用，更新 DTB 与 OTA 镜像释放复位引脚\n- 完成网卡 RX 不通复盘：硬件陈工与凯淋排查出电源端缺焊电阻，飞线后网口已正常启动\n- 未完成USB A口的HOST模式验证，目前烧录口共享 GL850 上游口，预期 USBA 作为下游口无法工作\n- 未完成USB C口的HOST模式验证，仅完成原理图核对：FB 板对于 USB3 缺少 DPDM，无法支持 2.0，只能走高速通道\n- 未完成USB C 口正反插识别：C 口与 A 口一样没有 CC 引脚，连接检测与正反插识别都做不了\n- 完成控制台命令历史持久化：overlay 落 00-history.sh，HISTFILE 指向 /userdata/.bash_history，HISTSIZE 3000 并去重\n- 进行中USBA与USBC接口飞线改板，改完后继续验证 A 口与 C 口的 USB2.0 / 3.0 支持能力\n\n## DV454\n### Alpine 客户\n- 完成Code3车载警示设备电气连接说明书编写：重绘实物接线总图，交付高清横排版说明书\n- 完成客户紧急反馈处理：展会前一天客户布展当天下午 4 点反馈会造成多开关耦合干扰，随后对接对方系统工程师验证 10 余项测试掌握互斥关系，6 点交付升级包，客户反馈已符合预期\n- 完成Code3 三路开关状态互锁与下发逻辑修复：由单路覆盖重构为整组状态维护，对目标控制位运算，补齐按键释放逻辑并增加 30ms 延时与写入确认，解决功能互相顶替问题\n- 完成Code3远程调试日志预埋点与 12 步测试矩阵设计：输出含通道、序号与状态的结构化分段日志，设计全组合测试用例与异常排查模板\n\n### xieli 客户\n- 完成AC501 RS232 监控服务开发与架构解耦：锁定 AA55 + Modbus CRC 帧结构，监控逻辑拆分到专用源文件，对齐 485 与 CAN 的错误码机制\n- 完成AC501 RS485 偶发离线根因定位与修复：排查出合并后取消协力客户宏导致线控器探测帧冲突，增加总线忙碌标志避免发送窗口碰撞，实测 100 个回包丢包率降为 0\n- 完成AC601物理通信链路验证：实测 CAN 通信正常，排查出 485 线序镜像导致的供电故障，调整线序后通信恢复\n- 完成AC601 RS232 协议验证：之前在 RS232 接口为 115200 8N1，已与摄像头组负责人协商统一为 9600 8N1 与 AC501 一致，按统一参数查询软硬件版本通过\n- 未完成AC601与AC501的区分：协议相通，计划通过协议查询的 HARDWARE 信息区分，离线后发两个设备查询包解析回复，用标志位锁定后续查询目标\n\n### 军车客户\n- 完成与 Alpine 客户线下会面中提到的新加坡军车数据平台会议待办梳理：整理十余条会议待办，交给禄钧参考\n\n### 通用板\n- 完成alarmin退出误关闭没有关联的 alarmout 修复：按实际绑定生效，退出仅释放对应 trigger 绑定的输出通道\n- 完成协助张敏构造 RS232 协议分割切换命令并校验：逆向复算协议，明确 CRC 计算域及低字节先发规则，输出几个标准四分割控制帧\n- 完成新申领的 AC501 232 声光报警器无声根因排查：链路与时序正常，定位为语音库缺失索引，实测 18 号音频存在且为中文，与当前在用设备的音频镜像版本不一致\n\n## DV456\n### DV456-ALEDO 客户\n- 进行中微波雷达分级报警输出独立配置（待下需求单）：WARN 区间与 ALARM 区间的 OUT 引脚各自独立配置，取消统一配置\n\n### DV456-ELECTRON 客户\n- 完成ADA650 车速门控联动：复用 GUI BSD 页面的速度上下限作为全部 Alarm In 的有效区间，超限或不达标按输入无效拦截，阻断报警与录像联动，不下发多余算法启停命令\n- 完成虚拟速度冗余串口输出修复：在 getVirturalSpeed 中为 virSpeed 为 0 或 -1 的告警分支增加客户宏隔离，避免每个周期刷屏淹没关键日志\n- 完成三起事件录像溯源：对比排查 10-14 报警日志，确认由物理引脚 Alarm In 1/2 高电平触发，属 AICAM 算法误报而非 DVR BUG\n\n### DV456-embedded 客户\n- 完成CAN 501 声光报警一致性排查（Bug 28）：单色灯对应 16、17、18 三个报警音索引，灯色 5 / 4 / 3，修复前中英文界面都回落红黄交替\n- 完成雷达与移动侦测 Alarm Out 2 无 PWM 排查（Bug 8）：查明两者底层均未接入 500ms 交替交变输出逻辑，疑似其他特采设备功能\n\n### DV456-FTC1 客户\n- 完成刷卡蜂鸣定位：授权刷卡器初始化即启动 15 次蜂鸣且不查开机蜂鸣开关，有效卡只负责停鸣，3 秒长鸣来自 ARM 报警链路\n\n### DV456-GBA 客户\n- 完成RFID 未知卡与异常卡状态清理：修复 RfidAuthorize 查询失败分支未清理司机信息的缺陷，鉴权失败时先清空姓名并调用 McuCurDriverUpdate 登出，再报未知卡报警\n\n## DV436\n- 完成旧自动化测试契约恢复：回滚公共 API 语义与返回字段，保障 HD277NVT / HD297NVT 旧用例正常运行\n- 完成DV436 接口隔离：新流程走独立入口，以宏把新旧自动化测试 API 隔开，旧用例调用路径不变\n- 完成AC501 与 AC601 英文界面声光报警「一中一英」根因定位：AC501 固化单色灯索引 16~18，AC601 走多语言索引且存在 3 秒中文缓存，导致逻辑重复处理\n"}]}</script>
+<script>
+(function(){
+  'use strict';
+  var BOOT = {};
+  try { BOOT = JSON.parse(document.getElementById('data').textContent) || {}; } catch(e){ BOOT = {}; }
+
+  var doc = document.getElementById('doc');
+  var editor = document.getElementById('editor');
+  var ta = document.getElementById('ta');
+  var listEl = document.getElementById('list');
+  var labelEl = document.getElementById('label');
+  var statusEl = document.getElementById('status');
+  var metaEl = document.getElementById('meta');
+  var modeEl = document.getElementById('mode');
+  var connectBox = document.getElementById('connectBox');
+
+  var dirHandle = null;
+  var records = [];
+  var current = null;
+  var editing = false;
+
+  function say(t, kind){
+    statusEl.textContent = t || '';
+    statusEl.className = 'status' + (kind ? ' ' + kind : '');
+  }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function inline(s){ return esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>'); }
+  function statusOf(t){
+    if (/^未完成/.test(t)) return {cls:'todo', len:3};
+    if (/^进行中/.test(t)) return {cls:'doing', len:3};
+    if (/^完成/.test(t)) return {cls:'done', len:2};
+    return null;
+  }
+
+  function stripFront(text){
+    var m = text.match(/^---\s*\n([\s\S]*?)\n---\s*\n/);
+    if (!m) return {meta:{}, body:text};
+    var meta = {};
+    m[1].split(/\r?\n/).forEach(function(line){
+      var i = line.indexOf(':');
+      if (i > 0) meta[line.slice(0,i).trim()] = line.slice(i+1).trim();
+    });
+    return {meta:meta, body:text.slice(m[0].length)};
+  }
+
+  function parse(md){
+    var nodes = [], lines = md.replace(/\r/g,'').split('\n');
+    for (var i=0;i<lines.length;i++){
+      var line = lines[i].trim();
+      if (!line) continue;
+      var m;
+      if ((m = line.match(/^#\s+(.+)$/))){ nodes.push({t:'h1', v:m[1]}); continue; }
+      if ((m = line.match(/^##\s+(.+)$/))){ nodes.push({t:'h2', v:m[1]}); continue; }
+      if ((m = line.match(/^###\s+(.+)$/))){ nodes.push({t:'h3', v:m[1]}); continue; }
+      if ((m = line.match(/^[-*]\s+(.+)$/))){ nodes.push({t:'li', v:m[1]}); continue; }
+      if ((m = line.match(/^(\d+)[.)]\s+(.+)$/))){ nodes.push({t:'li', v:m[2], n:parseInt(m[1],10)}); continue; }
+      nodes.push({t:'p', v:line});
+    }
+    return nodes;
+  }
+
+  function tally(md){
+    var nodes = parse(md), out = {done:0, todo:0, doing:0};
+    for (var i=0;i<nodes.length;i++){
+      if (nodes[i].t !== 'li') continue;
+      var st = statusOf(nodes[i].v);
+      if (st) out[st.cls] += 1;
+    }
+    return out;
+  }
+
+  function renderMd(rec){
+    var nodes = parse(rec.body);
+    var out = [], order = [], stat = {}, section = null, groupKey = 'g0', counter = {}, secNo = {}, curNo = 0;
+    for (var i=0;i<nodes.length;i++){
+      var n = nodes[i];
+      if (n.t === 'h1'){
+        var parts = n.v.split('|');
+        out.push('<h1>' + inline(parts[0].trim()) + '</h1>');
+        if (parts[1]) out.push('<p class="period">' + inline(parts[1].trim()) + '</p>');
+        continue;
+      }
+      if (n.t === 'h2'){
+        section = n.v; groupKey = 'h2:' + n.v; curNo = 0;
+        if (!stat[section]){ stat[section] = {done:0,todo:0,doing:0}; order.push(section); }
+        out.push('<h2>' + inline(n.v) + '</h2>');
+        continue;
+      }
+      if (n.t === 'h3'){
+        groupKey = 'h3:' + n.v;
+        out.push('<h3>' + inline(n.v) + '</h3>');
+        continue;
+      }
+      if (n.t === 'li'){
+        var mark;
+        if (typeof n.n === 'number'){ mark = n.n + '.'; }
+        else if (rec.list === 'number'){
+          counter[groupKey] = (counter[groupKey]||0)+1;
+          mark = counter[groupKey] + '.';
+        }
+        else { mark = '\u25CF'; }
+        var st = statusOf(n.v);
+        if (st && section && stat[section]) stat[section][st.cls] += 1;
+        var body = st
+          ? '<strong class="' + st.cls + '">' + esc(n.v.slice(0, st.len)) + '</strong>' + inline(n.v.slice(st.len))
+          : inline(n.v);
+        out.push('<p class="item"><span class="mk">' + mark + '</span>' + body + '</p>');
+        continue;
+      }
+      out.push('<p class="item">' + inline(n.v) + '</p>');
+    }
+    if (rec.summary === 'on' && order.length){
+      var rows = order.map(function(k){
+        var s = stat[k];
+        return '<tr><td>' + esc(k) + '</td><td class="num">' + s.done + '</td><td class="num">' +
+               s.todo + '</td><td class="num">' + s.doing + '</td></tr>';
+      }).join('');
+      var table = '<table><thead><tr><th>系列</th><th class="num">完成</th><th class="num">未完成</th>' +
+                  '<th class="num">进行中</th></tr></thead><tbody>' + rows + '</tbody></table>';
+      for (var j=0;j<out.length;j++){
+        if (out[j].indexOf('<p class="period">') === 0){ out.splice(j+1,0,table); break; }
+      }
+    }
+    return out.join('\n');
+  }
+
+  function plainMd(rec){
+    var nodes = parse(rec.body), out = [], counter = {}, groupKey = 'g0';
+    for (var i=0;i<nodes.length;i++){
+      var n = nodes[i];
+      if (n.t === 'h1'){
+        var parts = n.v.split('|');
+        out.push(parts[0].trim());
+        if (parts[1]) out.push(parts[1].trim());
+        continue;
+      }
+      if (n.t === 'h2'){ groupKey = 'h2:'+n.v; out.push(n.v); continue; }
+      if (n.t === 'h3'){ groupKey = 'h3:'+n.v; out.push(n.v); continue; }
+      if (n.t === 'li'){
+        var mark;
+        if (typeof n.n === 'number'){ mark = n.n + '.'; }
+        else if (rec.list === 'number'){ counter[groupKey] = (counter[groupKey]||0)+1; mark = counter[groupKey] + '.'; }
+        else { mark = '\u25CF'; }
+        out.push(mark + ' ' + n.v.replace(/\*\*/g,''));
+        continue;
+      }
+      out.push(n.v.replace(/\*\*/g,''));
+    }
+    return out.join('\n');
+  }
+
+  function makeRecord(rel, name, handle, text){
+    var f = stripFront(text);
+    var kind = (f.meta.kind || (/月报/.test(name) ? 'monthly' : 'weekly'));
+    var h1 = (f.body.match(/^#\s+(.+)$/m) || [])[1] || '';
+    var period = h1.indexOf('|') > -1 ? h1.split('|')[1].trim() : '';
+    var digits = (name.match(/\d+/g) || []).join('');
+    return {
+      rel: rel, name: name, handle: handle, raw: text, body: f.body, meta: f.meta,
+      kind: kind, list: kind === 'monthly' ? 'number' : 'bullet',
+      summary: f.meta.summary || (kind === 'monthly' ? 'on' : 'off'),
+      title: f.meta.title || name.replace(/\.md$/i,''),
+      period: period, sort: parseInt(digits || '0', 10)
+    };
+  }
+
+  function adopt(list){
+    records = list.slice().sort(function(a, b){ return b.sort - a.sort; });
+    buildList();
+    var want = decodeURIComponent(location.hash.slice(1));
+    var hit = null;
+    for (var i=0;i<records.length;i++) if (records[i].name === want) hit = records[i];
+    show(hit || records[0] || null);
+  }
+
+  function groupLabel(r){
+    var i = r.rel.indexOf('/');
+    return i > 0 ? r.rel.slice(0, i) : (r.kind === 'monthly' ? '月报' : '周报');
+  }
+
+  function buildList(){
+    var order = [], map = {};
+    records.forEach(function(r){
+      var g = groupLabel(r);
+      if (!map[g]){ map[g] = []; order.push(g); }
+      map[g].push(r);
+    });
+    order.sort(function(a, b){
+      var sa = map[a][0] ? map[a][0].sort : 0;
+      var sb = map[b][0] ? map[b][0].sort : 0;
+      return sb - sa;
+    });
+    listEl.innerHTML = '';
+    order.forEach(function(key){
+      var head = document.createElement('div');
+      head.className = 'group';
+      head.textContent = key;
+      listEl.appendChild(head);
+      map[key].forEach(function(r){
+        var t = tally(r.body);
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'entry';
+        btn.setAttribute('data-rel', r.rel);
+        btn.innerHTML = '<span class="name">' + esc(r.title) + '</span>' +
+                        '<span class="sub">' + esc(r.period || r.name) + '</span>' +
+                        '<span class="tally">完成 ' + t.done + ' · 未完成 ' + t.todo + ' · 进行中 ' + t.doing + '</span>';
+        btn.addEventListener('click', function(){
+          if (editing) stopEdit(false);
+          location.hash = encodeURIComponent(r.name);
+        });
+        listEl.appendChild(btn);
+      });
+    });
+  }
+
+  function highlight(){
+    var nodes = listEl.querySelectorAll('.entry');
+    for (var i=0;i<nodes.length;i++){
+      nodes[i].classList.toggle('active', current && nodes[i].getAttribute('data-rel') === current.rel);
+    }
+  }
+
+  function show(rec){
+    current = rec;
+    editing = false;
+    editor.hidden = true;
+    doc.hidden = false;
+    document.getElementById('btnSave').hidden = true;
+    document.getElementById('btnCancel').hidden = true;
+    document.getElementById('btnEdit').hidden = false;
+    if (!rec){
+      doc.innerHTML = '<div class="empty">还没有报告。<br>把 .md 放进子文件夹（如 周报 / 月报），或点左边「选择报告文件夹」。</div>';
+      labelEl.textContent = '';
+      highlight();
+      return;
+    }
+    doc.innerHTML = renderMd(rec);
+    labelEl.textContent = rec.rel + (rec.handle ? '' : ' · 快照');
+    document.title = rec.title + ' · 工作报告';
+    highlight();
+    say('');
+  }
+
+  function startEdit(){
+    if (!current) return;
+    if (!current.handle){
+      say('快照不能改，先连接文件夹', 'warn');
+      return;
+    }
+    editing = true;
+    ta.value = current.raw;
+    doc.hidden = true;
+    editor.hidden = false;
+    document.getElementById('btnSave').hidden = false;
+    document.getElementById('btnCancel').hidden = false;
+    document.getElementById('btnEdit').hidden = true;
+    ta.focus();
+    say('改完 Ctrl+S');
+  }
+
+  function stopEdit(reload){
+    editing = false;
+    editor.hidden = true;
+    doc.hidden = false;
+    document.getElementById('btnSave').hidden = true;
+    document.getElementById('btnCancel').hidden = true;
+    document.getElementById('btnEdit').hidden = false;
+    if (reload && current){ current = makeRecord(current.rel, current.name, current.handle, current.raw); show(current); }
+  }
+
+  async function saveEdit(){
+    if (!current || !editing) return;
+    if (!current.handle){ say('没有文件句柄，无法写回', 'warn'); return; }
+    try {
+      var perm = await current.handle.queryPermission({mode:'readwrite'});
+      if (perm !== 'granted'){
+        perm = await current.handle.requestPermission({mode:'readwrite'});
+      }
+      if (perm !== 'granted'){ say('没有写入权限', 'warn'); return; }
+      var w = await current.handle.createWritable();
+      await w.write(ta.value);
+      await w.close();
+      current.raw = ta.value;
+      var f = stripFront(ta.value);
+      current.body = f.body;
+      current.meta = f.meta;
+      stopEdit(false);
+      show(makeRecord(current.rel, current.name, current.handle, current.raw));
+      buildList();
+      highlight();
+      say('已写回 ' + current.rel, 'ok');
+    } catch (err){
+      say('写入失败：' + (err && err.name ? err.name : 'error'), 'warn');
+    }
+  }
+
+  // ---------- 目录 ----------
+  async function pickFolder(){
+    if (!window.showDirectoryPicker){
+      say('这个浏览器不支持文件夹访问', 'warn');
+      return;
+    }
+    try {
+      var h = await window.showDirectoryPicker({mode:'readwrite', id:'work-report'});
+      var perm = await h.requestPermission({mode:'readwrite'});
+      if (perm !== 'granted'){ say('没有授权', 'warn'); return; }
+      dirHandle = h;
+      await idbSet('dir', h);
+      await loadFromDir();
+    } catch (err){
+      if (err && err.name === 'AbortError') return;
+      say('打开失败：' + (err && err.name ? err.name : 'error'), 'warn');
+    }
+  }
+
+  async function scan(){
+    var out = [];
+    for await (var entry of dirHandle.entries()){
+      var name = entry[0], h = entry[1];
+      if (h.kind === 'directory'){
+        if (name.charAt(0) === '_' || name === 'node_modules') continue;
+        for await (var f of h.entries()){
+          var fn = f[0], fh = f[1];
+          if (fh.kind !== 'file') continue;
+          if (!/\.md$/i.test(fn)) continue;
+          if (fn.charAt(0) === '_') continue;
+          var file = await fh.getFile();
+          out.push(makeRecord(name + '/' + fn, fn, fh, await file.text()));
+        }
+      } else if (h.kind === 'file'){
+        if (!/\.md$/i.test(name) || name.charAt(0) === '_') continue;
+        var f0 = await h.getFile();
+        out.push(makeRecord(name, name, h, await f0.text()));
+      }
+    }
+    return out;
+  }
+
+  async function loadFromDir(){
+    try {
+      var list = await scan();
+      metaEl.textContent = dirHandle.name + ' · ' + list.length + ' 份';
+      modeEl.textContent = '实时';
+      modeEl.className = 'mode live';
+      connectBox.hidden = true;
+      adopt(list);
+    } catch (err){
+      say('读取失败：' + (err && err.name ? err.name : 'error'), 'warn');
+    }
+  }
+
+  // ---------- IndexedDB ----------
+  function idb(){
+    return new Promise(function(res, rej){
+      var r = indexedDB.open('work-report', 1);
+      r.onupgradeneeded = function(){ r.result.createObjectStore('kv'); };
+      r.onsuccess = function(){ res(r.result); };
+      r.onerror = function(){ rej(r.error); };
+    });
+  }
+  async function idbSet(k, v){
+    try { var db = await idb();
+      await new Promise(function(res, rej){
+        var tx = db.transaction('kv','readwrite');
+        tx.objectStore('kv').put(v, k);
+        tx.oncomplete = res; tx.onerror = function(){ rej(tx.error); };
+      });
+    } catch(e){}
+  }
+  async function idbGet(k){
+    try { var db = await idb();
+      return await new Promise(function(res){
+        var tx = db.transaction('kv','readonly');
+        var rq = tx.objectStore('kv').get(k);
+        rq.onsuccess = function(){ res(rq.result || null); };
+        rq.onerror = function(){ res(null); };
+      });
+    } catch(e){ return null; }
+  }
+
+  // ---------- 启动 ----------
+  // 先同步画快照，再去问 IndexedDB —— 索引读取慢不能拖住首屏
+  function boot(){
+    var snaps = (BOOT.reports || []).map(function(r){
+      return makeRecord(r.file, String(r.file).split('/').pop(), null, r.md);
+    });
+    if (snaps.length){
+      records = snaps;
+      metaEl.textContent = '快照 · ' + snaps.length + ' 份';
+    }
+    adopt(records);
+    upgradeFromStore();
+  }
+
+  async function upgradeFromStore(){
+    try {
+      var saved = await idbGet('dir');
+      if (!saved) return;
+      var perm = await saved.queryPermission({mode:'readwrite'});
+      if (perm === 'granted'){
+        dirHandle = saved;
+        await loadFromDir();
+        return;
+      }
+      dirHandle = saved;
+      document.getElementById('btnConnect').textContent = '继续使用 ' + saved.name;
+      document.getElementById('connectHint').textContent = '上次用的文件夹还在，点一下继续（浏览器会再确认一次）。';
+    } catch(e){}
+  }
+
+  document.getElementById('btnConnect').addEventListener('click', async function(){
+    if (dirHandle){
+      var perm = await dirHandle.requestPermission({mode:'readwrite'});
+      if (perm === 'granted'){ await loadFromDir(); return; }
+    }
+    await pickFolder();
+  });
+  document.getElementById('btnEdit').addEventListener('click', startEdit);
+  document.getElementById('btnSave').addEventListener('click', saveEdit);
+  document.getElementById('btnCancel').addEventListener('click', function(){ stopEdit(true); });
+  document.getElementById('btnCopy').addEventListener('click', function(){
+    if (!current) return;
+    var html = '<div>' + renderMd(current) + '</div>';
+    var text = plainMd(current);
+    if (navigator.clipboard && window.ClipboardItem){
+      navigator.clipboard.write([new ClipboardItem({
+        'text/html': new Blob([html], {type:'text/html'}),
+        'text/plain': new Blob([text], {type:'text/plain'})
+      })]).then(function(){ say('已复制，可直接粘贴', 'ok'); })
+        .catch(function(){ say('复制失败', 'warn'); });
+    } else { say('不支持富文本复制', 'warn'); }
+  });
+  document.getElementById('btnMd').addEventListener('click', function(){
+    if (!current) return;
+    navigator.clipboard.writeText(current.raw).then(function(){ say('已复制 Markdown', 'ok'); })
+      .catch(function(){ say('复制失败', 'warn'); });
+  });
+  document.getElementById('btnPrint').addEventListener('click', function(){ window.print(); });
+  window.addEventListener('hashchange', function(){
+    var want = decodeURIComponent(location.hash.slice(1));
+    for (var i=0;i<records.length;i++) if (records[i].name === want){ show(records[i]); return; }
+  });
+  window.addEventListener('keydown', function(e){
+    if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')){
+      e.preventDefault();
+      if (editing) saveEdit();
+      else say('先点「编辑」', '');
+    }
+  });
+
+  window.__test = {
+    loadFromMap: function(map){
+      var list = [];
+      Object.keys(map).forEach(function(rel){
+        list.push(makeRecord(rel, rel.split('/').pop(), null, map[rel]));
+      });
+      adopt(list);
+    },
+    setDir: function(h){ dirHandle = h; return loadFromDir(); }
+  };
+
+  boot();
+})();
+</script>
+</body>
+</html>

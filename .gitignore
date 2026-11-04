@@ -1,0 +1,7 @@
+.dsh/
+__pycache__/
+*.pyc
+_素材/
+_草稿-*.md
+trees/
+*.log

@@ -1,0 +1,224 @@
+{
+  "series": {
+    "DV460": {
+      "groups": null
+    },
+    "DV456": {
+      "groups": [
+        "DV456-ELECTRON 客户",
+        "DV456-GBA 客户",
+        "DV456-FTC1 客户",
+        "DV456-embedded 客户",
+        "DV456-ALEDO 客户",
+        "TMV 客户"
+      ]
+    },
+    "DV454": {
+      "groups": [
+        "Alpine 客户",
+        "xieli 客户",
+        "jiuyitong 客户",
+        "GMT 客户",
+        "军车客户",
+        "通用板"
+      ]
+    },
+    "DV436": {
+      "groups": [
+        "DV436-novatek 客户"
+      ]
+    }
+  },
+  "label_case": "upper",
+  "limits": {
+    "weekly_item_chars": 120,
+    "monthly_item_chars": 120,
+    "min_chars": 40
+  },
+  "limits_nonwork": {
+    "weekly_item_chars": 120,
+    "monthly_item_chars": 120,
+    "min_chars": 0
+  },
+  "status_words": [
+    "完成",
+    "未完成",
+    "进行中"
+  ],
+  "forbidden_words": [
+    "这正是",
+    "本质上",
+    "值得注意的是",
+    "综上",
+    "由此可见",
+    "闭环",
+    "赋能",
+    "抓手",
+    "助力"
+  ],
+  "projects": {
+    "work": [
+      {
+        "match": "prj-mdvrv1",
+        "series": "DV454",
+        "group": "通用板"
+      },
+      {
+        "match": "prj-mdvrv2",
+        "series": "DV454",
+        "group": "通用板"
+      },
+      {
+        "match": "learn-mdvrv1",
+        "series": "DV454",
+        "group": "通用板"
+      },
+      {
+        "match": "prj-dv454-xieli",
+        "series": "DV454",
+        "group": "xieli 客户"
+      },
+      {
+        "match": "prj-dv436",
+        "series": "DV436",
+        "group": ""
+      },
+      {
+        "match": "dv436-novatek",
+        "series": "DV436",
+        "group": ""
+      },
+      {
+        "match": "rk3576",
+        "series": "DV460",
+        "group": ""
+      },
+      {
+        "match": "dv460",
+        "series": "DV460",
+        "group": ""
+      }
+    ],
+    "nonwork": [
+      {
+        "match": "AI聊天记录收集器",
+        "group": "工具链"
+      },
+      {
+        "match": "agenttrail",
+        "group": "工具链"
+      },
+      {
+        "match": "zcode-ui",
+        "group": "工具链"
+      },
+      {
+        "match": "opencode-provider",
+        "group": "工具链"
+      },
+      {
+        "match": "opencode.jsonc",
+        "group": "工具链"
+      },
+      {
+        "match": "CODEX",
+        "group": "工具链"
+      },
+      {
+        "match": "drawio-skill",
+        "group": "工具链"
+      },
+      {
+        "match": "coding-agent",
+        "group": "工具链"
+      },
+      {
+        "match": "esp32c3-lanweaker",
+        "group": "个人项目"
+      },
+      {
+        "match": "lanweaker-coreport",
+        "group": "个人项目"
+      },
+      {
+        "match": "rental-space-analysis",
+        "group": "个人项目"
+      },
+      {
+        "match": "gannan-orange-ops",
+        "group": "个人项目"
+      },
+      {
+        "match": "赣南脐橙",
+        "group": "个人项目"
+      },
+      {
+        "match": "拼多多",
+        "group": "个人项目"
+      },
+      {
+        "match": "脐橙",
+        "group": "个人项目"
+      }
+    ],
+    "ignore": [
+      "wb-demo",
+      "codexprobe",
+      "Default Project",
+      "Temp",
+      "工作报告测试",
+      "dsh-demo",
+      "session-demo",
+      "hello.py",
+      "note.md",
+      "只回答一个词",
+      "OK 指令",
+      "OK指令",
+      "单词回复",
+      "response request",
+      "只回复两个字"
+    ],
+    "board_hints": [
+      {
+        "pattern": "code3|alpine",
+        "series": "DV454",
+        "group": "Alpine 客户"
+      },
+      {
+        "pattern": "军车",
+        "series": "DV454",
+        "group": "军车客户"
+      },
+      {
+        "pattern": "dv456|456FTC|456EMBEDDED|\\b456\\b",
+        "series": "DV456",
+        "group": "DV456-embedded 客户"
+      },
+      {
+        "pattern": "dv436|\\b436\\b",
+        "series": "DV436",
+        "group": ""
+      },
+      {
+        "pattern": "dv460|rk3576",
+        "series": "DV460",
+        "group": ""
+      },
+      {
+        "pattern": "dv424|\\b454\\b|drawio",
+        "series": "DV454",
+        "group": "通用板"
+      }
+    ]
+  },
+  "week_start": "tuesday",
+  "series_order": [
+    "DV460",
+    "DV454",
+    "DV456",
+    "DV436",
+    "工具链",
+    "个人项目",
+    "其他"
+  ]
+}
