@@ -5,3 +5,13 @@ _素材/
 _草稿-*.md
 trees/
 *.log
+
+# insights 技能的中间产物与本地数据
+insights/tmp/
+insights/history/
+insights/data/
+insights/reports/
+insights/新数据源/*.zip
+insights/参考项目/
+insights/.pytest_cache/
+insights/.ruff_cache/

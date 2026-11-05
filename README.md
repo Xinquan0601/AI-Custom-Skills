@@ -5,6 +5,7 @@
 ```
 AI自建技能/
   work-report/     工作报告：agenttrail 数据包 -> 周报/月报 + 索引.html
+  insights/        AI 使用洞察：导出包 -> stats/narratives -> 单文件 HTML 洞察报告
   .dsh/skills/     安装位置（junction 指回上面的目录，已被 .gitignore 忽略）
   link-skills.ps1  把每个技能目录挂到 .dsh/skills/
 ```
@@ -12,7 +13,7 @@ AI自建技能/
 ## 新增一个技能
 
 1. 在仓库根建同名目录：`xxx/`，里面至少 `SKILL.md`（frontmatter 要有 `name: xxx`）
-2. 可选子目录沿用同一套：`references/` `scripts/` `config/` `templates/` `demo/`
+2. 可选子目录沿用同一套：`references/` `scripts/` `config/` `templates/` `demo/` `docs/`
 3. 加 `README.md`（怎么用）和 `CHANGELOG.md`（改了什么）
 4. `pwsh link-skills.ps1` —— 技能立即出现在 DSH 里，不需要复制文件
 
